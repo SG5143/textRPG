@@ -23,7 +23,7 @@ public class IOManager {
 		return instance;
 	}
 
-	public static void printLine(String msg) {
+	public static void printString(String msg) {
 		sb.setLength(0);
 		sb.append(msg);
 		try {
@@ -35,7 +35,7 @@ public class IOManager {
 	}
 	
 	public static String inputString(String msg) {
-		printLine(msg);
+		printString(msg);
 		try {
 			String input = br.readLine();
 			return input;
