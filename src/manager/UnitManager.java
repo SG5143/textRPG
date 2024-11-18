@@ -2,8 +2,6 @@ package manager;
 
 import java.util.ArrayList;
 import java.util.Random;
-
-import managers.UserDataManager;
 import units.Adventurer;
 import units.Monster;
 
