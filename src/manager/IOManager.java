@@ -30,7 +30,7 @@ public class IOManager {
 			bw.append(sb);
 			bw.flush();
 		} catch (IOException e) {
-			// 
+			return; 
 		}
 	}
 	
