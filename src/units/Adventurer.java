@@ -21,7 +21,8 @@ public class Adventurer extends Unit {
 		this.hp = hp;
 	}
 
-	public Adventurer(int code, int level, String name, int att, int hp, boolean party) {
+	public Adventurer(int code, int level, String name, int att, int hp, boolean party, Item weapon, Item armor,
+			Item ring) {
 		this.identifierCode = code;
 		this.level = level;
 		this.name = name;
@@ -29,6 +30,9 @@ public class Adventurer extends Unit {
 		this.maxHp = hp;
 		this.hp = hp;
 		this.party = party;
+		this.weapon = weapon;
+		this.armor = armor;
+		this.ring = ring;
 	}
 
 	@Override
@@ -77,16 +81,16 @@ public class Adventurer extends Unit {
 	}
 
 	private Item equipItem(Item curItem, Item item) {
-		if (curItem != null && curItem.isEquipped()) {
+		if (curItem != null && curItem.getEquippedBy()!=0) {
 			removeItemEffects(curItem);
-			curItem.setEquipped(false);
+			curItem.setEquippedBy(0);
 		}
 
 		if (item == null)
 			return null;
 
 		curItem = item;
-		curItem.setEquipped(true);
+		curItem.setEquippedBy(identifierCode);
 
 		applyItemEffects(item);
 		return item;
