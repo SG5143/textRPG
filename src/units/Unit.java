@@ -9,6 +9,10 @@ public abstract class Unit {
 
 	public Unit() {}
 
+	public int getLevel() {
+		return level;
+	}
+	
 	public String getName() {
 		return name;
 	}
