@@ -1,15 +1,15 @@
 package item;
 
 public class Item {
-	private int kind;  // 1.weapon 2.armor 3.ring 
-	private int code; 
-	private String name; 
-	private int hp; 
-	private int att; 
-	private int price; 
+	private int kind; // 1.weapon 2.armor 3.ring
+	private int code;
+	private String name;
+	private int hp;
+	private int att;
+	private int price;
 
-	private boolean isEquipped; 
-	
+	private int equippedBy;
+
 	public Item(int kind, int code, String name, int hp, int att, int price) {
 		this.kind = kind;
 		this.code = code;
@@ -17,19 +17,20 @@ public class Item {
 		this.hp = hp;
 		this.att = att;
 		this.price = price;
+		this.equippedBy = 0;
 	}
-	
+
 	// 로드용 생성자
-	public Item(int kind, int code, String name, int hp, int att, int price, boolean isEquipped) {
+	public Item(int kind, int code, String name, int hp, int att, int price, int equippedBy) {
 		this.kind = kind;
 		this.code = code;
 		this.name = name;
 		this.hp = hp;
 		this.att = att;
 		this.price = price;
-		this.isEquipped = isEquipped;
+		this.equippedBy = equippedBy;
 	}
-	
+
 	public int getKind() {
 		return kind;
 	}
@@ -54,11 +55,11 @@ public class Item {
 		return price;
 	}
 
-	public boolean isEquipped() {
-		return isEquipped;
+	public int getEquippedBy() {åå
+		return equippedBy;
 	}
 
-	public void setEquipped(boolean set) {
-		this.isEquipped = set;
+	public void setEquippedBy(int set) {
+		this.equippedBy = set;
 	}
 }
