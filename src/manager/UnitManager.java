@@ -9,7 +9,7 @@ public class UnitManager {
 	public static Random r;
 	private static ArrayList<Monster> monsterList;
 
-	private final static String PATE = "manager.";
+	private final static String PATE = "units.";
 	private final static String MONS[] = { "MonsterGhoul", "MonsterGoblin", "MonsterOrc" };
 
 	private UnitManager() {
