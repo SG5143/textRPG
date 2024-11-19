@@ -43,31 +43,29 @@ public class FileManager {
 		 * kind/code/name/hp/att/price/isEquipped;
 		 */
 
-        for (Item item : itemList) {
-           IOManager.sb.append(String.format(
-        		   	"%d/%d/%s/%d/%d/%d/%d\n",
-                    item.getKind(),
-                    item.getCode(),
-                    item.getName(),
-                    item.getHp(),
-                    item.getAtt(),
-                    item.getPrice(),
-                    item.getEquippedBy()));
-        }
+		for (Item item : itemList) {
+			IOManager.sb.append(String.format("%d/%d/%s/%d/%d/%d/%d\n",
+					item.getKind(),
+					item.getCode(),
+					item.getName(),
+					item.getHp(),
+					item.getAtt(),
+					item.getPrice(),
+					item.getEquippedBy()));
+		}
 
-        for (Adventurer adventurer : adventurerList) {
-        	 IOManager.sb.append(String.format(
-        			"%d/%d/%s/%d/%d/%b/%d/%d/%d\n",
-                    adventurer.getCode(),
-                    adventurer.getLevel(),
-                    adventurer.getName(),
-                    adventurer.getAtt(),
-                    adventurer.getMaxHp(),
-                    adventurer.isParty(),
-                    getItemCode(adventurer.getWeapon()),
-                    getItemCode(adventurer.getArmor()),
-                    getItemCode(adventurer.getRing())));
-        }
+		for (Adventurer adventurer : adventurerList) {
+			IOManager.sb.append(String.format("%d/%d/%s/%d/%d/%b/%d/%d/%d\n", 
+					adventurer.getCode(),
+					adventurer.getLevel(),
+					adventurer.getName(),
+					adventurer.getAtt(),
+					adventurer.getMaxHp(),
+					adventurer.isParty(),
+					getItemCode(adventurer.getWeapon()),
+					getItemCode(adventurer.getArmor()),
+					getItemCode(adventurer.getRing())));
+		}
 
 		try (FileWriter fw = new FileWriter(FILE_NAME)) {
 			fw.write(IOManager.sb.toString());
@@ -77,10 +75,10 @@ public class FileManager {
 	}
 
 	public static boolean loadUserData() {
-		if (!file.exists()) return false;
+		if (!file.exists())
+			return false;
 
-		try (BufferedReader br = new BufferedReader(new FileReader(file))){
-			ArrayList<Item> itemList = new ArrayList<>();
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			String[] basicInfo = br.readLine().split("/");
 
 			UserDataManager.setNextDungeonLevel(Integer.parseInt(basicInfo[0]));
@@ -88,16 +86,15 @@ public class FileManager {
 			int adventurerCount = Integer.parseInt(basicInfo[2]);
 			int itemCount = Integer.parseInt(basicInfo[3]);
 
-			
-            for (int i = 0; i < itemCount; i++) {
-                String[] itemData = br.readLine().split("/");
-                UserDataManager.addItem(parseItem(itemData));
-            }
+			for (int i = 0; i < itemCount; i++) {
+				String[] itemData = br.readLine().split("/");
+				UserDataManager.addItem(parseItem(itemData));
+			}
 
-            for (int i = 0; i < adventurerCount; i++) {
-                String[] adventurerData = br.readLine().split("/");
-                UserDataManager.addAdventurer(parseAdventurer(adventurerData, itemList));
-            }
+			for (int i = 0; i < adventurerCount; i++) {
+				String[] adventurerData = br.readLine().split("/");
+				UserDataManager.addAdventurer(parseAdventurer(adventurerData, UserDataManager.getItemList()));
+			}
 
 		} catch (FileNotFoundException e) {
 			return false;
@@ -106,43 +103,43 @@ public class FileManager {
 		}
 		return true;
 	}
-	
-    private static Item parseItem(String[] data) {
-        int kind = Integer.parseInt(data[0]);
-        int code = Integer.parseInt(data[1]);
-        String name = data[2];
-        int hp = Integer.parseInt(data[3]);
-        int att = Integer.parseInt(data[4]);
-        int price = Integer.parseInt(data[5]);
-        int equippedByCode = Integer.parseInt(data[6]);
 
-        return new Item(kind, code, name, hp, att, price, equippedByCode);
-    }
-    
-    private static Adventurer parseAdventurer(String[] data, ArrayList<Item> itemList) {
-        int idenCode = Integer.parseInt(data[0]);
-        int level = Integer.parseInt(data[1]);
-        String name = data[2];
-        int att = Integer.parseInt(data[3]);
-        int hp = Integer.parseInt(data[4]);
-        boolean party = Boolean.parseBoolean(data[5]);
+	private static Item parseItem(String[] data) {
+		int kind = Integer.parseInt(data[0]);
+		int code = Integer.parseInt(data[1]);
+		String name = data[2];
+		int hp = Integer.parseInt(data[3]);
+		int att = Integer.parseInt(data[4]);
+		int price = Integer.parseInt(data[5]);
+		int equippedByCode = Integer.parseInt(data[6]);
 
-        Item weapon = findEquipItem(itemList, Integer.parseInt(data[6]));
-        Item armor = findEquipItem(itemList, Integer.parseInt(data[7]));
-        Item ring = findEquipItem(itemList, Integer.parseInt(data[8]));
+		return new Item(kind, code, name, hp, att, price, equippedByCode);
+	}
 
-        return new Adventurer(idenCode, level, name, att, hp, party, weapon, armor, ring);
-    }
+	private static Adventurer parseAdventurer(String[] data, ArrayList<Item> itemList) {
+		int idenCode = Integer.parseInt(data[0]);
+		int level = Integer.parseInt(data[1]);
+		String name = data[2];
+		int att = Integer.parseInt(data[3]);
+		int hp = Integer.parseInt(data[4]);
+		boolean party = Boolean.parseBoolean(data[5]);
 
-    private static int getItemCode(Item item) {
-        return item == null ? 0 : item.getCode();
-    }
-	
-	private static Item findEquipItem(ArrayList<Item> itemList, int code) {
+		Item weapon = findEquipItem(itemList, idenCode, Integer.parseInt(data[6]));
+		Item armor = findEquipItem(itemList, idenCode, Integer.parseInt(data[7]));
+		Item ring = findEquipItem(itemList, idenCode, Integer.parseInt(data[8]));
+
+		return new Adventurer(idenCode, level, name, att, hp, party, weapon, armor, ring);
+	}
+
+	private static int getItemCode(Item item) {
+		return item == null ? 0 : item.getCode();
+	}
+
+	private static Item findEquipItem(ArrayList<Item> itemList, int idenCode, int code) {
 		if (code == 0)
 			return null;
 		for (Item i : itemList) {
-			if (i.getEquippedBy()==code)
+			if (i.getEquippedBy() == idenCode && code == i.getCode())
 				return i;
 		}
 		return null;
