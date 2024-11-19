@@ -3,10 +3,13 @@ package stage;
 import java.util.HashMap;
 import java.util.Map;
 
+import manager.FileManager;
 import manager.IOManager;
+import manager.UserDataManager;
+import units.Adventurer;
 
 public class MainStage {
-	Map<String, Stage> stageList;
+	private Map<String, Stage> stageList;
 
 	public MainStage() {
 		stageList = new HashMap<String, Stage>();
@@ -15,6 +18,7 @@ public class MainStage {
 		stageList.put("길드", new StageGuild());
 		stageList.put("상점", new StageShop());
 		stageList.put("인벤토리", new StageInventory());
+		initLoadData();
 	}
 
 	public boolean activate() {
@@ -29,6 +33,20 @@ public class MainStage {
 				break;
 		}
 		return false;
+	}
+
+	// 데이터 로드-리프레시, 없을 경우 디폴트 모험가 
+	private void initLoadData() {
+		if (!FileManager.loadUserData()) {
+			Adventurer adven1 = new Adventurer("모험가", 1000, 40);
+			Adventurer adven2 = new Adventurer("초보자", 700, 80);
+
+			adven1.toggleParty(true);
+			adven2.toggleParty(true);
+			UserDataManager.addAdventurer(adven1);
+			UserDataManager.addAdventurer(adven2);
+		}
+		UserDataManager.refreshPartyList();
 	}
 
 	private void printMainStage() {
