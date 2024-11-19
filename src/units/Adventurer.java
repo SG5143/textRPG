@@ -72,6 +72,22 @@ public class Adventurer extends Unit {
 		return ring;
 	}
 
+	public void unequipItem(int kind) {
+		if (kind == 1 && weapon != null) {
+			removeItemEffects(weapon);
+			weapon.setEquippedBy(0);
+			weapon = null;
+		} else if (kind == 2 && armor != null) {
+			removeItemEffects(armor);
+			armor.setEquippedBy(0);
+			armor = null;
+		} else if (kind == 3 && ring != null) {
+			removeItemEffects(ring);
+			ring.setEquippedBy(0);
+			ring = null;
+		}
+	}
+
 	public void setItem(Item item) {
 		switch (item.getKind()) {
 		case 1 -> this.weapon = equipItem(this.weapon, item);
@@ -81,7 +97,7 @@ public class Adventurer extends Unit {
 	}
 
 	private Item equipItem(Item curItem, Item item) {
-		if (curItem != null && curItem.getEquippedBy()!=0) {
+		if (curItem != null && curItem.getEquippedBy() != 0) {
 			removeItemEffects(curItem);
 			curItem.setEquippedBy(0);
 		}
