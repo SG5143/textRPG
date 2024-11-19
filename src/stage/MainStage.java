@@ -37,11 +37,11 @@ public class MainStage {
 		return false;
 	}
 
-	// 데이터 로드-리프레시, 없을 경우 디폴트 모험가 
+	// 데이터 로드-리프레시, 없을 경우 디폴트 모험가
 	private void initLoadData() {
 		if (!FileManager.loadUserData()) {
-			Adventurer adven1 = new Adventurer("모험가", 1000, 40);
-			Adventurer adven2 = new Adventurer("초보자", 700, 80);
+			Adventurer adven1 = new Adventurer("모험가", 40, 1000);
+			Adventurer adven2 = new Adventurer("초보자", 80, 700);
 
 			adven1.toggleParty(true);
 			adven2.toggleParty(true);
