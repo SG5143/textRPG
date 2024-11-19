@@ -1,6 +1,7 @@
 package units;
 
 import item.Item;
+import manager.IOManager;
 import manager.UnitManager;
 
 public class Adventurer extends Unit {
@@ -37,8 +38,28 @@ public class Adventurer extends Unit {
 
 	@Override
 	public void attack(Unit target) {
-		if (target instanceof Monster)
-			;
+		if (!(target instanceof Monster))
+			return;
+
+		int damage = UnitManager.r.nextInt(att / 2) + (int) (att * 0.8);
+		target.setHp(target.getHp() - damage);
+		String msg = "[%s의 공격] 몬스터 [%s]에게 공격하여 %d의 피해 입혔습니다.\n";
+		IOManager.printString(String.format(msg, name, target.getName(), damage));
+	}
+
+	public void criticalAttack(Unit target) {
+		if (!(target instanceof Monster))
+			return;
+
+		if (UnitManager.r.nextBoolean()) {
+			int damage = UnitManager.r.nextInt(att / 2) + att * 2;
+			target.setHp(target.getHp() - damage);
+			String msg = "[%s의 공격] 몬스터 [%s]에게 공격하여 %d의 치명타를 적중했습니다.\n";
+			IOManager.printString(String.format(msg, name, target.getName(), damage));
+		} else {
+			String msg = "[%s의 공격] 몬스터 [%s]의 급소를 노렸지만 실패했습니다..\n";
+			IOManager.printString(String.format(msg, name, target.getName()));
+		}
 	}
 
 	public void levelUp() {
