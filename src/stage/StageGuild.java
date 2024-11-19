@@ -106,9 +106,9 @@ public class StageGuild implements Stage {
 				=       길드원 "%s"가 추가되었어\t =
 				==========================================
 				""";
-		String playerName = UserDataManager.getAdventurerList().get(UserDataManager.getAdventurerList().size() - 1)
+		String AdvenName = UserDataManager.getAdventurerList().get(UserDataManager.getAdventurerList().size() - 1)
 				.getName();
-		IOManager.printString(String.format(msg, playerName));
+		IOManager.printString(String.format(msg, AdvenName));
 	}
 
 	private void printInvalidInputMessage() {
@@ -148,8 +148,8 @@ public class StageGuild implements Stage {
 				=       길드원 "%s"가 삭제되었어\t =
 				==========================================
 				""";
-		String playerName = UserDataManager.getAdventurerList().get(index).getName();
-		IOManager.printString(String.format(msg, playerName));
+		String AdvenName = UserDataManager.getAdventurerList().get(index).getName();
+		IOManager.printString(String.format(msg, AdvenName));
 	}
 
 	private void printGuildStage() {
