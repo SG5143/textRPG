@@ -80,9 +80,7 @@ public class FileManager {
 		if (!file.exists()) return false;
 
 		try (BufferedReader br = new BufferedReader(new FileReader(file))){
-			ArrayList<Adventurer> adventurerList = new ArrayList<>();
 			ArrayList<Item> itemList = new ArrayList<>();
-
 			String[] basicInfo = br.readLine().split("/");
 
 			UserDataManager.setNextDungeonLevel(Integer.parseInt(basicInfo[0]));
@@ -93,12 +91,12 @@ public class FileManager {
 			
             for (int i = 0; i < itemCount; i++) {
                 String[] itemData = br.readLine().split("/");
-                itemList.add(parseItem(itemData));
+                UserDataManager.addItem(parseItem(itemData));
             }
 
             for (int i = 0; i < adventurerCount; i++) {
                 String[] adventurerData = br.readLine().split("/");
-                adventurerList.add(parseAdventurer(adventurerData, itemList));
+                UserDataManager.addAdventurer(parseAdventurer(adventurerData, itemList));
             }
 
 		} catch (FileNotFoundException e) {
