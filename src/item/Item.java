@@ -55,7 +55,7 @@ public class Item {
 		return price;
 	}
 
-	public int getEquippedBy() {åå
+	public int getEquippedBy() {
 		return equippedBy;
 	}
 
