@@ -52,8 +52,8 @@ public class Adventurer extends Unit {
 		return party;
 	}
 
-	public void toggleParty() {
-		party = !party;
+	public void toggleParty(boolean b) {
+		party = b;
 	}
 
 	public int getCode() {
