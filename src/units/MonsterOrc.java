@@ -9,7 +9,8 @@ public class MonsterOrc extends Unit implements Monster {
 	public MonsterOrc() {
 		super.level = UserDataManager.getNextDungeonLevel();
 		super.name = "오크";
-		super.hp = UnitManager.r.nextInt(level * 300) + (level * 100);
+		super.maxHp = UnitManager.r.nextInt(level * 300) + (level * 100);
+		super.hp = maxHp;
 		super.att = UnitManager.r.nextInt(level * 20) + (level * 10);
 	}
 

@@ -9,7 +9,8 @@ public class MonsterGoblin extends Unit implements Monster {
 	public MonsterGoblin() {
 		super.level = UserDataManager.getNextDungeonLevel();
 		super.name = "고블린";
-		super.hp = UnitManager.r.nextInt(level * 200) + (level * 50);
+		super.maxHp = UnitManager.r.nextInt(level * 200) + (level * 50);
+		super.hp = maxHp;
 		super.att = UnitManager.r.nextInt(level * 10) + (level * 5);
 	}
 

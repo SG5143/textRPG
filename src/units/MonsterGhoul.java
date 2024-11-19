@@ -9,7 +9,8 @@ public class MonsterGhoul extends Unit implements Monster {
 	public MonsterGhoul() {
 		level = UserDataManager.getNextDungeonLevel();
 		name = "구울";
-		super.hp = UnitManager.r.nextInt(level * 300) + (level * 1);
+		super.maxHp = UnitManager.r.nextInt(level * 300) + (level * 1);
+		super.hp = maxHp;
 		super.att = UnitManager.r.nextInt(level * 20) + (level * 1);
 	}
 
