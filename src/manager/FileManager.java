@@ -12,10 +12,9 @@ import item.Item;
 import units.Adventurer;
 
 public class FileManager {
-
 	private final String FILE_NAME = "Text_RPG_DATA";
 
-	private File file;
+	private static File file;
 
 	private FileManager() {
 		file = new File(FILE_NAME);
@@ -77,7 +76,7 @@ public class FileManager {
 		}
 	}
 
-	public boolean loadUserData() {
+	public static boolean loadUserData() {
 		if (!file.exists()) return false;
 
 		try (BufferedReader br = new BufferedReader(new FileReader(file))){
@@ -110,7 +109,7 @@ public class FileManager {
 		return true;
 	}
 	
-    private Item parseItem(String[] data) {
+    private static Item parseItem(String[] data) {
         int kind = Integer.parseInt(data[0]);
         int code = Integer.parseInt(data[1]);
         String name = data[2];
@@ -122,7 +121,7 @@ public class FileManager {
         return new Item(kind, code, name, hp, att, price, equippedByCode);
     }
     
-    private Adventurer parseAdventurer(String[] data, ArrayList<Item> itemList) {
+    private static Adventurer parseAdventurer(String[] data, ArrayList<Item> itemList) {
         int idenCode = Integer.parseInt(data[0]);
         int level = Integer.parseInt(data[1]);
         String name = data[2];
@@ -141,7 +140,7 @@ public class FileManager {
         return item == null ? 0 : item.getCode();
     }
 	
-	private Item findEquipItem(ArrayList<Item> itemList, int code) {
+	private static Item findEquipItem(ArrayList<Item> itemList, int code) {
 		if (code == 0)
 			return null;
 		for (Item i : itemList) {
