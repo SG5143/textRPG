@@ -29,8 +29,10 @@ public class MainStage {
 			if (stageList.containsKey(command)) {
 				stageList.get(command).activateStage();
 				printMainStage();
-			} else if (command.equals("종료"))
+			} else if (command.equals("종료")) {
+				FileManager.saveUserData();
 				break;
+			}
 		}
 		return false;
 	}
