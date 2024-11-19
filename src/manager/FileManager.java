@@ -12,7 +12,7 @@ import item.Item;
 import units.Adventurer;
 
 public class FileManager {
-	private final String FILE_NAME = "Text_RPG_DATA";
+	private final static String FILE_NAME = "Text_RPG_DATA";
 
 	private static File file;
 
@@ -26,7 +26,7 @@ public class FileManager {
 		return instance;
 	}
 
-	public void saveUserData() {
+	public static void saveUserData() {
 		ArrayList<Adventurer> adventurerList = UserDataManager.getAdventurerList();
 		ArrayList<Item> itemList = UserDataManager.getItemList();
 
@@ -136,7 +136,7 @@ public class FileManager {
         return new Adventurer(idenCode, level, name, att, hp, party, weapon, armor, ring);
     }
 
-    private int getItemCode(Item item) {
+    private static int getItemCode(Item item) {
         return item == null ? 0 : item.getCode();
     }
 	
