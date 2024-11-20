@@ -28,7 +28,7 @@ public class StageGuild implements Stage {
 		}
 	}
 
-	public void gennerateNewMember() {
+	private void gennerateNewMember() {
 		if (UserDataManager.getGold() < COST) {
 			printInsufficientGoldMessage();
 			return;
@@ -59,7 +59,7 @@ public class StageGuild implements Stage {
 		return IOManager.sb.toString();
 	}
 
-	public void deleteMember(String msg) {
+	private void deleteMember(String msg) {
 		if (UserDataManager.getAdventurerList().size() == 1) {
 			printMinimumMemberWarning();
 			return;
